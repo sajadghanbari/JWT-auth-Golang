@@ -2,9 +2,10 @@ package routes
 
 import (
 	"JWT-Authentication-go/controllers"
-	"github.com/gofiber/fiber/v3"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func SetupRoutes(app *fiber.App) {
-	app.Get("/hello", controllers.Hello)
+	app.Get("/", controllers.Hello)
 }

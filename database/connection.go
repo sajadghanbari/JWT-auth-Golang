@@ -10,7 +10,7 @@ var DB  *gorm.DB
 
 
 func Connect() (*gorm.DB, error){
-	dsn := "root:password@tcp(localhost:8500)/jwt_go"
+	dsn := "root:@tcp(localhost:8500)/jwt_go"
 
 	db,err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

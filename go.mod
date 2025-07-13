@@ -4,6 +4,7 @@ go 1.24.2
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.8
+	golang.org/x/crypto v0.29.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.30.0
 )

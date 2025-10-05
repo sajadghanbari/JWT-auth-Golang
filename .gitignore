@@ -1,4 +1,4 @@
-
+# === Go build & binary files ===
 /bin/
 /build/
 /dist/
@@ -11,22 +11,22 @@
 *.test
 *.out
 
-
+# === Log & JSON files (global) ===
 *.log
 *.json
 
+# === Ignore specific config files ===
+config/docker-config.yml
+config/development-config.yml
 
-docker-config
-development-config.yml
-
-
+# === OS-specific ===
 .DS_Store
 Thumbs.db
 
-
+# === IDE / Editor ===
 .vscode/
 .idea/
 *.swp
 
-
- /docs/
+# === Swagger auto-generated files (optional) ===
+# /docs/

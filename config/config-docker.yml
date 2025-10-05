@@ -17,6 +17,7 @@ postgres:
   maxIdleConns: 15
   maxOpenConns: 100
   connMaxLifetime: 5
+  autoMigrate : false
 redis:
   host: redis_container
   port: 6379

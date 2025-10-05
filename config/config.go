@@ -32,6 +32,7 @@ type PostgresConfig struct {
 	MaxIdleConns    int
 	MaxOpenConns    int
 	ConnMaxLifetime time.Duration
+	AutoMigrate bool
 }
 
 type RedisConfig struct {

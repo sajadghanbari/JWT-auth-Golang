@@ -14,6 +14,18 @@ import (
 
 var validate = validator.New()
 
+
+// CreateUser godoc
+// @Summary      Create a new user
+// @Description  Create a new user with name, email, and password
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param        user  body  dto.CreateUserRequest  true  "User data"
+// @Success      201  {object}  dto.UserResponse
+// @Failure      400  {object}  map[string]string
+// @Failure      409  {object}  map[string]string
+// @Router       /users/create [post]
 func CreateUser(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		var req dto.CreateUserRequest
@@ -58,6 +70,15 @@ func CreateUser(db *gorm.DB) fiber.Handler {
 	}
 }
 
+
+// GetAllUsers godoc
+// @Summary      Get all users
+// @Description  Retrieve all users from the database
+// @Tags         users
+// @Produce      json
+// @Success      200  {array}  dto.UserResponse
+// @Failure      500  {object}  map[string]string
+// @Router       /users/get-users [get]
 func GetAllUsers(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		var users []models.User
@@ -83,6 +104,17 @@ func GetAllUsers(db *gorm.DB) fiber.Handler {
 	}
 }
 
+
+// DeleteUser godoc
+// @Summary      Delete a user
+// @Description  Delete a user by their ID
+// @Tags         users
+// @Produce      json
+// @Param        id   path   int  true  "User ID"
+// @Success      200  {object}  map[string]string  "User deleted successfully"
+// @Failure      404  {object}  map[string]string  "User not found"
+// @Failure      500  {object}  map[string]string  "Internal server error"
+// @Router       /users/delete/{id} [delete]
 func DeleteUser(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		id := c.Params("id")
@@ -112,6 +144,20 @@ func DeleteUser(db *gorm.DB) fiber.Handler {
 	}
 }
 
+
+// UpdateUser godoc
+// @Summary      Update an existing user
+// @Description  Update user details (only provided fields will be changed)
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param        id    path   int                      true  "User ID"
+// @Param        user  body   dto.UpdateUserRequest     true  "Updated user data"
+// @Success      200   {object}  dto.UserResponse
+// @Failure      400   {object}  map[string]string  "Invalid request or validation error"
+// @Failure      404   {object}  map[string]string  "User not found"
+// @Failure      500   {object}  map[string]string  "Internal server error"
+// @Router       /users/update/{id} [put]
 func UpdateUser(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		id := c.Params("id")

@@ -16,7 +16,7 @@ var validate = validator.New()
 
 func CreateUser(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req dto.CreateUpdateUserRequest
+		var req dto.CreateUserRequest
 		err := c.BodyParser(&req)
 		if err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -109,5 +109,63 @@ func DeleteUser(db *gorm.DB) fiber.Handler {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"message": "User deleted successfully",
 		})
+	}
+}
+
+func UpdateUser(db *gorm.DB) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		id := c.Params("id")
+
+		var user models.User
+		err := db.First(&user, id).Error
+		if err != nil {
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+					"error": "User not found",
+				})
+			}
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Could not find user",
+			})
+		}
+
+		var req dto.UpdateUserRequest
+		if err := c.BodyParser(&req); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": "Cannot parse JSON",
+			})
+		}
+
+
+		if err := validate.Struct(req); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err.Error(),
+			})
+		}
+
+		//TODO this part can be better
+		if req.Name != nil {
+			user.Name = *req.Name
+		}
+		if req.Email != nil {
+			user.Email = *req.Email
+		}
+		if req.Password != nil {
+			user.Password = services.HashPassword(*req.Password)
+		}
+
+		if err := db.Save(&user).Error; err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Could not update user",
+			})
+		}
+
+		response := dto.UserResponse{
+			Id:    int(user.ID),
+			Name:  user.Name,
+			Email: user.Email,
+		}
+
+		return c.Status(fiber.StatusOK).JSON(response)
 	}
 }

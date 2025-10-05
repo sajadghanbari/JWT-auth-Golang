@@ -82,3 +82,32 @@ func GetAllUsers(db *gorm.DB) fiber.Handler {
 		return c.Status(fiber.StatusOK).JSON(userResponses)
 	}
 }
+
+func DeleteUser(db *gorm.DB) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		id := c.Params("id")
+		var user models.User
+
+		err := db.First(&user, id).Error
+		if err != nil {
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+					"error": "User not found",
+				})
+			}
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Could not find user",
+			})
+		}
+
+		err = db.Delete(&user).Error
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Could not delete user",
+			})
+		}
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"message": "User deleted successfully",
+		})
+	}
+}

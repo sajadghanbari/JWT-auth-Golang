@@ -12,4 +12,5 @@ func InitRoutes(app *fiber.App) {
 	users := app.Group("/users")
 	users.Post("/create", handlers.CreateUser(database))
 	users.Get("/get-users", handlers.GetAllUsers(database))
+	users.Delete("/delete/:id", handlers.DeleteUser(database))
 }

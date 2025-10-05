@@ -10,5 +10,6 @@ import (
 func InitRoutes(app *fiber.App) {
 	database := db.GetDb()
 	users := app.Group("/users")
-	users.Post("/users/create", handlers.CreateUser(database))
+	users.Post("/create", handlers.CreateUser(database))
+	users.Get("/get-users", handlers.GetAllUsers(database))
 }

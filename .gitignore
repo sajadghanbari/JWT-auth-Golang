@@ -16,8 +16,8 @@
 *.json
 
 # === Ignore specific config files ===
-config/docker-config.yml
-config/development-config.yml
+config/config-development.yml
+config/config-docker.yml
 
 # === OS-specific ===
 .DS_Store
@@ -29,4 +29,6 @@ Thumbs.db
 *.swp
 
 # === Swagger auto-generated files (optional) ===
-# /docs/
+ /docs/
+
+ /

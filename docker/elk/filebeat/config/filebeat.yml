@@ -1,0 +1,27 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - "/usr/share/filebeat/logs/*.log"
+    fields:
+      environment: Development
+    tags: ["gocourse"]
+    multiline.pattern: "^{"
+    multiline.negate: true
+    multiline.match: after
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: filebeat_internal
+  password: ${FILEBEAT_INTERNAL_PASSWORD}
+  index: "logs-service-%{+yyyy.MM.dd}"
+
+setup.template.name: "logs-service"
+setup.template.pattern: "logs-service-*"
+
+setup.kibana.host: "kibana:5601"
+
+logging.level: info
+fields_under_root: true
+fields:
+  host.ip: 127.0.0.1

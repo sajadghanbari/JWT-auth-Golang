@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"JWT-Authentication-go/config"
-	logging "JWT-Authentication-go/pkg"
+	"JWT-Authentication-go/pkg/logging"
 
 	"time"
 

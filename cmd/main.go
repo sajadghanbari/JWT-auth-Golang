@@ -5,20 +5,30 @@ import (
 	"JWT-Authentication-go/config"
 	db "JWT-Authentication-go/data/database"
 	_ "JWT-Authentication-go/docs"
+	"JWT-Authentication-go/pkg/logging"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
+
 	"github.com/gofiber/swagger"
 )
 
 func main() {
+	
 	var cfg = config.GetConfig()
-	db.InitDb(cfg)
+	logger := logging.NewLogger(cfg)
+	err := db.InitDb(cfg)
+	if err != nil {
+		logger.Fatal(logging.Postgres, logging.Startup, err.Error(), nil)
+	}
 	defer db.CloseDb()
 	app := fiber.New()
 
-	app.Use(logger.New())
+
 	routes.InitRoutes(app)
-	app.Get("/swagger/*", swagger.HandlerDefault)
-	// پورت را از فایل کانفیگ بخوانید تا مدیریت آن راحت‌تر باشد
+	setupSwagger(app)
 	app.Listen(":" + cfg.Server.Port)
+}
+
+func setupSwagger(app *fiber.App) {
+    app.Get("/swagger/*", swagger.HandlerDefault)
 }

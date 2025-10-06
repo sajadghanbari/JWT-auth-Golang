@@ -9,7 +9,7 @@ import (
 
 func Cors(cfg *config.Config) fiber.Handler {
 	return cors.New(cors.Config{
-		AllowOrigins:     cfg.Cors.AllowOrigins, 
+		AllowOrigins:     "http://localhost:5005", 
 		AllowCredentials: true,
 		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS,UPDATE",
 		AllowHeaders:     "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With",

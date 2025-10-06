@@ -8,6 +8,8 @@ require (
 	github.com/gofiber/swagger v1.1.1
 	github.com/spf13/viper v1.21.0
 	github.com/swaggo/swag v1.16.6
+	go.uber.org/zap v1.27.0
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.30.0
 )
@@ -28,6 +30,7 @@ require (
 	github.com/philhofer/fwd v1.1.3-0.20240916144458-20a13a1f6b7c // indirect
 	github.com/swaggo/files/v2 v2.0.2 // indirect
 	github.com/tinylib/msgp v1.2.5 // indirect
+	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/mod v0.28.0 // indirect
 	golang.org/x/tools v0.37.0 // indirect
 )

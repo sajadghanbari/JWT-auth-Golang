@@ -15,6 +15,7 @@ type Config struct {
 	Redis    RedisConfig
 	Password PasswordConfig
 	Cors     CorsConfig
+	Logger LoggerConfig
 }
 
 type ServerConfig struct {
@@ -46,6 +47,12 @@ type RedisConfig struct {
 	IdleCheckFrequency time.Duration
 	PoolSize           int
 	PoolTimeout        time.Duration
+}
+
+type LoggerConfig struct {
+	FilePath string
+	Encoding string
+	Level    string
 }
 
 type PasswordConfig struct {

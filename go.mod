@@ -4,7 +4,6 @@ go 1.24.2
 
 require (
 	github.com/go-playground/validator/v10 v10.27.0
-	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/gofiber/swagger v1.1.1

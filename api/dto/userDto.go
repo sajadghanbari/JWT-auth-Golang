@@ -18,3 +18,7 @@ type UserResponse struct {
 	Name string `json:"name"`
 	Email string `json:"email"`
 }
+
+type GetOtpRequest struct {
+	MobileNumber string `json:"mobileNumber" binding:"required,mobile,min=11,max=11"`
+}

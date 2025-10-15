@@ -15,12 +15,19 @@ type Config struct {
 	Redis    RedisConfig
 	Password PasswordConfig
 	Cors     CorsConfig
-	Logger LoggerConfig
+	Logger   LoggerConfig
+	Otp 	OtpConfig
 }
 
 type ServerConfig struct {
 	Port    string
 	runMode string
+}
+
+type OtpConfig struct {
+	ExpireTime time.Duration
+	Digits     int
+	Limiter    time.Duration
 }
 
 type PostgresConfig struct {
@@ -33,7 +40,7 @@ type PostgresConfig struct {
 	MaxIdleConns    int
 	MaxOpenConns    int
 	ConnMaxLifetime time.Duration
-	AutoMigrate bool
+	AutoMigrate     bool
 }
 
 type RedisConfig struct {

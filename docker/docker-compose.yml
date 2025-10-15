@@ -72,7 +72,7 @@ services:
       - --strict.perms=false
     volumes:
       - ./elk/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /d/programing/JWT-auth-golang/Logs:/usr/share/filebeat/logs:ro   # مسیر لاگ واقعی در ویندوز ✅
+      - /d/programing/JWT-auth-golang/Logs:/usr/share/filebeat/logs:ro     
     environment:
       FILEBEAT_INTERNAL_PASSWORD: ${FILEBEAT_INTERNAL_PASSWORD:-}
       BEATS_SYSTEM_PASSWORD: ${FILEBEAT_INTERNAL_PASSWORD:-}

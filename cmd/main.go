@@ -3,6 +3,7 @@ package main
 import (
 	"JWT-Authentication-go/api/routes"
 	"JWT-Authentication-go/config"
+	"JWT-Authentication-go/data/cache"
 	db "JWT-Authentication-go/data/database"
 	_ "JWT-Authentication-go/docs"
 	"JWT-Authentication-go/pkg/logging"
@@ -21,6 +22,10 @@ func main() {
 		logger.Fatal(logging.Postgres, logging.Startup, err.Error(), nil)
 	}
 	defer db.CloseDb()
+
+
+	cache.InitRedis(cfg)
+	defer cache.CloseRedis()
 	app := fiber.New()
 
 

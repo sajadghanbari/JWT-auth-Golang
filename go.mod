@@ -4,11 +4,14 @@ go 1.24.2
 
 require (
 	github.com/go-playground/validator/v10 v10.27.0
+	github.com/go-redis/redis v6.15.9+incompatible
+	github.com/go-redis/redis/v7 v7.4.1
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/gofiber/swagger v1.1.1
 	github.com/spf13/viper v1.21.0
 	github.com/swaggo/swag v1.16.6
 	go.uber.org/zap v1.27.0
+	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.30.0
@@ -34,7 +37,6 @@ require (
 	golang.org/x/mod v0.28.0 // indirect
 	golang.org/x/tools v0.37.0 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
-	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
 )
 
 require (
